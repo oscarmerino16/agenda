@@ -1,14 +1,22 @@
 Algoritmo agenda
 	
-	Definir nombre, eliminar, buscar, editar Como Caracter;
-	Definir telf, i Como Entero;
+	Definir nombre, eliminar, buscar, editar, vContacto, cont, telf Como Caracter;
+	Definir  i, tam Como Entero;
+	
+	
+	tam=10;
+	Dimension vContacto[tam];
+	
+	Para i=0 Hasta tam -1 Con Paso 1 Hacer
+		vContacto[i]= "";
+	Fin Para
 	
 	i=0;
 	nombre="";
 	buscar="";
 	eliminar="";
-	telf=0;
 	editar="";
+	
 	
 	Repetir
 		Escribir "Pulsa 1 para añadir nuevos empleados";
@@ -22,38 +30,59 @@ Algoritmo agenda
 		Segun i Hacer
 			1:
 				Escribir "Dime el nombre del nuevo empleado";
-				Leer nombre;
+				leer nombre;
 				Escribir "Dime el telefono del nuevo emplado";
 				leer telf;
+				cont= nombre+";"+telf;
+				Para i=0 Hasta tam -1 Con Paso 1 Hacer
+					si (vContacto[i]== "") Entonces
+						vContacto[i]= cont ;
+						i=tam;
+					FinSi
+				Fin Para
 			2:
 				Escribir "Que empleado quieres borrar";
 				leer eliminar;
 				
-				Si eliminar=nombre Entonces
-					nombre=" ";
-					telf=0;
-				Fin Si
+				Para i=0 Hasta tam -1 Con Paso 1 Hacer
+					si (vContacto[i]<> "") Entonces
+						vContacto[i]= " " ;
+						i=tam;
+					FinSi
+				Fin Para
 				
 			3:
 				Escribir "Que empleado quieres editar";
 				leer editar;
 				
-				Si editar=nombre Entonces
-					Escribir "Dime el numero de telf";
-					leer telf;
-				Fin Si
+				Para i=0 Hasta tam -1 Con Paso 1 Hacer
+					si (vContacto[i]<> "") Entonces
+						si editar=nombre Entonces
+							escribir "Dime el nuevo nombre";
+							leer nombre;
+						SiNo
+							escribir "Ese usuario no existe";
+						FinSi
+						i=tam;
+					FinSi
+				Fin Para
 			4:
 				Escribir "Que empleado quieres buscar";
 				leer buscar;
 				
-				Si buscar=nombre Entonces
-					Escribir "El empleado ", nombre, " su telefono es ", telf;
-				SiNo
-					Escribir "No hay ningun empleado con ese nombre";
-				Fin Si
+				Para i=0 Hasta tam -1 Con Paso 1 Hacer
+					si (vContacto[i]== "") Entonces
+						vContacto[i]= cont ;
+						i=tam;
+					FinSi
+				Fin Para
 			5:
-				Escribir nombre;
-				Escribir telf;
+				Para i=0 Hasta tam -1 Con Paso 1 Hacer
+					si (vContacto[i]<> "") Entonces
+						Escribir vContacto[i];
+					FinSi
+				Fin Para
+				
 				
 		Fin Segun
 		
