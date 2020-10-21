@@ -1,7 +1,7 @@
 Algoritmo agenda
 	
 	Definir nombre, eliminar, buscar, editar, vContacto, cont, telf Como Caracter;
-	Definir  i, tam Como Entero;
+	Definir  i, tam, j Como Entero;
 	
 	
 	tam=10;
@@ -46,8 +46,15 @@ Algoritmo agenda
 				
 				Para i=0 Hasta tam -1 Con Paso 1 Hacer
 					si (vContacto[i]<> "") Entonces
-						vContacto[i]= " " ;
-						i=tam;
+						Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
+							Si (Subcadena(vContacto[i],j,j)== ";")Entonces
+								nombre=Subcadena(vContacto[i],0,j-1);
+								telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+							Fin Si
+						Fin Para
+						si (eliminar==nombre) Entonces
+							vContacto[i]="";
+						FinSi
 					FinSi
 				Fin Para
 				
@@ -69,17 +76,32 @@ Algoritmo agenda
 			4:
 				Escribir "Que empleado quieres buscar";
 				leer buscar;
-				
+				nombre="";
+				telf="";
 				Para i=0 Hasta tam -1 Con Paso 1 Hacer
-					si (vContacto[i]== "") Entonces
-						vContacto[i]= cont ;
-						i=tam;
+					si (vContacto[i]<> "") Entonces
+						Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
+							Si (Subcadena(vContacto[i],j,j)== ";")Entonces
+								nombre=Subcadena(vContacto[i],0,j-1);
+								telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+							Fin Si
+						Fin Para
+						si (buscar==nombre o buscar==telf) Entonces
+							Escribir nombre + " --- " + telf;
+						FinSi
+						
 					FinSi
 				Fin Para
 			5:
 				Para i=0 Hasta tam -1 Con Paso 1 Hacer
 					si (vContacto[i]<> "") Entonces
-						Escribir vContacto[i];
+						Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
+							Si (Subcadena(vContacto[i],j,j)== ";")Entonces
+								nombre=Subcadena(vContacto[i],0,j-1);
+								telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+							Fin Si
+						Fin Para
+						Escribir nombre + " --- " + telf;
 					FinSi
 				Fin Para
 				
