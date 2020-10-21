@@ -1,3 +1,49 @@
+
+SubProceso nuevo_contacto(vContacto,tam)
+	
+	Definir i Como Entero;
+	Definir nombre, telf, cont Como Caracter;
+	Escribir "Dime el nombre del nuevo empleado";
+	leer nombre;
+	Escribir "Dime el telefono del nuevo emplado";
+	leer telf;
+	cont= nombre+";"+telf;
+	Para i=0 Hasta tam -1 Con Paso 1 Hacer
+		si (vContacto[i]== "") Entonces
+			vContacto[i]= cont ;
+			i=tam;
+		FinSi
+	Fin Para
+	
+FinsubProceso
+
+
+SubProceso eliminar_contacto(vContacto,tam)
+	Definir nombre,telf, eliminar Como Caracter;
+	Definir i, j Como Entero;
+	
+	Escribir "Que empleado quieres borrar";
+	leer eliminar;
+	
+	Para i=0 Hasta tam -1 Con Paso 1 Hacer
+		si (vContacto[i]<> "") Entonces
+			Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
+				Si (Subcadena(vContacto[i],j,j)== ";")Entonces
+					nombre=Subcadena(vContacto[i],0,j-1);
+					telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+				Fin Si
+			Fin Para
+			si (eliminar==nombre) Entonces
+				vContacto[i]="";
+			FinSi
+		FinSi
+	Fin Para
+	
+FinSubProceso
+
+
+
+
 Algoritmo agenda
 	
 	Definir nombre, eliminar, buscar, editar, vContacto, cont, telf Como Caracter;
@@ -29,21 +75,14 @@ Algoritmo agenda
 		
 		Segun i Hacer
 			1:
-				Escribir "Dime el nombre del nuevo empleado";
-				leer nombre;
-				Escribir "Dime el telefono del nuevo emplado";
-				leer telf;
-				cont= nombre+";"+telf;
-				Para i=0 Hasta tam -1 Con Paso 1 Hacer
-					si (vContacto[i]== "") Entonces
-						vContacto[i]= cont ;
-						i=tam;
-					FinSi
-				Fin Para
+				nuevo_contacto(vContacto,tam);
 			2:
-				Escribir "Que empleado quieres borrar";
-				leer eliminar;
+				eliminar_contacto(vContacto,tam);
 				
+			3:
+				Escribir "Que empleado quieres editar";
+				leer editar;
+			
 				Para i=0 Hasta tam -1 Con Paso 1 Hacer
 					si (vContacto[i]<> "") Entonces
 						Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
@@ -52,25 +91,15 @@ Algoritmo agenda
 								telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
 							Fin Si
 						Fin Para
-						si (eliminar==nombre) Entonces
-							vContacto[i]="";
-						FinSi
-					FinSi
-				Fin Para
-				
-			3:
-				Escribir "Que empleado quieres editar";
-				leer editar;
-				
-				Para i=0 Hasta tam -1 Con Paso 1 Hacer
-					si (vContacto[i]<> "") Entonces
-						si editar=nombre Entonces
-							escribir "Dime el nuevo nombre";
+						Si editar==nombre Entonces
+							vContacto[i]= "";
+							Escribir "Dime el nuevo nombre";
 							leer nombre;
-						SiNo
-							escribir "Ese usuario no existe";
+							Escribir "Dime el nuevo telefono";
+							leer telf;
+							cont= nombre+";"+telf;
+							vContacto[i]=cont;
 						FinSi
-						i=tam;
 					FinSi
 				Fin Para
 			4:
