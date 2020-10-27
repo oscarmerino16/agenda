@@ -1,5 +1,5 @@
 
-SubProceso nuevo_contacto(vContacto,tam)
+SubProceso nuevo_contacto(mContactos,fila,columna)
 	
 	Definir i Como Entero;
 	Definir nombre, telf, cont Como Caracter;
@@ -8,40 +8,40 @@ SubProceso nuevo_contacto(vContacto,tam)
 	Escribir "Dime el telefono del nuevo emplado";
 	leer telf;
 	cont= nombre+";"+telf;
-	Para i=0 Hasta tam -1 Con Paso 1 Hacer
-		si (vContacto[i]== "") Entonces
-			vContacto[i]= cont ;
-			i=tam;
+	Para i=0 Hasta fila -1 Con Paso 1 Hacer
+		si (mContactos[i]== "") Entonces
+			mContactos[i]= cont ;
+			i=fila;
 		FinSi
 	Fin Para
 	
 FinsubProceso
 
 
-SubProceso eliminar_contacto(vContacto,tam)
+SubProceso eliminar_contacto(mContactos,fila,columna)
 	Definir nombre,telf, eliminar Como Caracter;
 	Definir i, j Como Entero;
 	
 	Escribir "Que empleado quieres borrar";
 	leer eliminar;
 	
-	Para i=0 Hasta tam -1 Con Paso 1 Hacer
-		si (vContacto[i]<> "") Entonces
-			Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
-				Si (Subcadena(vContacto[i],j,j)== ";")Entonces
-					nombre=Subcadena(vContacto[i],0,j-1);
-					telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+	Para i=0 Hasta fila -1 Con Paso 1 Hacer
+		si (mContactos[i]<> "") Entonces
+			Para j=0 Hasta Longitud(mContactos[i])-1 Con Paso 1 Hacer
+				Si (Subcadena(mContactos[i],j,j)== ";")Entonces
+					nombre=Subcadena(mContactos[i],0,j-1);
+					telf=Subcadena(mContactos[i],j+1,Longitud(mContactos[i])-1);
 				Fin Si
 			Fin Para
 			si (eliminar==nombre) Entonces
-				vContacto[i]="";
+				mContactos[i]="";
 			FinSi
 		FinSi
 	Fin Para
 	
 FinSubProceso
 
-SubProceso editar_contacto(vContacto,tam)
+SubProceso editar_contacto(mContactos,fila,columna)
 	
 	Definir nombre,telf, editar, cont Como Caracter;
 	Definir i, j Como Entero;
@@ -49,29 +49,29 @@ SubProceso editar_contacto(vContacto,tam)
 	Escribir "Que empleado quieres editar";
 	leer editar;
 	
-	Para i=0 Hasta tam -1 Con Paso 1 Hacer
-		si (vContacto[i]<> "") Entonces
-			Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
-				Si (Subcadena(vContacto[i],j,j)== ";")Entonces
-					nombre=Subcadena(vContacto[i],0,j-1);
-					telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+	Para i=0 Hasta fila -1 Con Paso 1 Hacer
+		si (mContactos[i]<> "") Entonces
+			Para j=0 Hasta Longitud(mContactos[i])-1 Con Paso 1 Hacer
+				Si (Subcadena(mContactos[i],j,j)== ";")Entonces
+					nombre=Subcadena(mContactos[i],0,j-1);
+					telf=Subcadena(mContactos[i],j+1,Longitud(mContactos[i])-1);
 				Fin Si
 			Fin Para
 			Si editar==nombre Entonces
-				vContacto[i]= "";
+				mContactos[i]= "";
 				Escribir "Dime el nuevo nombre";
 				leer nombre;
 				Escribir "Dime el nuevo telefono";
 				leer telf;
 				cont= nombre+";"+telf;
-				vContacto[i]=cont;
+				mContactos[i]=cont;
 			FinSi
 		FinSi
 	Fin Para
 	
 FinSubProceso
 
-subProceso buscar_contacto(vContacto,tam)
+subProceso buscar_contacto(mContactos,fila,columna)
 	
 	Definir nombre,telf, buscar Como Caracter;
 	Definir i, j Como Entero;
@@ -80,12 +80,12 @@ subProceso buscar_contacto(vContacto,tam)
 	leer buscar;
 	nombre="";
 	telf="";
-	Para i=0 Hasta tam -1 Con Paso 1 Hacer
-		si (vContacto[i]<> "") Entonces
-			Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
-				Si (Subcadena(vContacto[i],j,j)== ";")Entonces
-					nombre=Subcadena(vContacto[i],0,j-1);
-					telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+	Para i=0 Hasta fila -1 Con Paso 1 Hacer
+		si (mContactos[i]<> "") Entonces
+			Para j=0 Hasta Longitud(mContactos[i])-1 Con Paso 1 Hacer
+				Si (Subcadena(mContactos[i],j,j)== ";")Entonces
+					nombre=Subcadena(mContactos[i],0,j-1);
+					telf=Subcadena(mContactos[i],j+1,Longitud(mContactos[i])-1);
 				Fin Si
 			Fin Para
 			si (buscar==nombre o buscar==telf) Entonces
@@ -97,17 +97,17 @@ subProceso buscar_contacto(vContacto,tam)
 	
 FinSubProceso
 
-subProceso ver_contacto(vContacto,tam)
+subProceso ver_contacto(mContactos,fila,columna)
 	
 	Definir nombre,telf Como Caracter;
 	Definir i, j Como Entero;
 	
-	Para i=0 Hasta tam -1 Con Paso 1 Hacer
-		si (vContacto[i]<> "") Entonces
-			Para j=0 Hasta Longitud(vContacto[i])-1 Con Paso 1 Hacer
-				Si (Subcadena(vContacto[i],j,j)== ";")Entonces
-					nombre=Subcadena(vContacto[i],0,j-1);
-					telf=Subcadena(vContacto[i],j+1,Longitud(vContacto[i])-1);
+	Para i=0 Hasta fila -1 Con Paso 1 Hacer
+		si (mContactos[i]<> "") Entonces
+			Para j=0 Hasta Longitud(mContactos[i])-1 Con Paso 1 Hacer
+				Si (Subcadena(mContactos[i],j,j)== ";")Entonces
+					nombre=Subcadena(mContactos[i],0,j-1);
+					telf=Subcadena(mContactos[i],j+1,Longitud(mContactos[i])-1);
 				Fin Si
 			Fin Para
 			Escribir nombre + " --- " + telf;
@@ -119,16 +119,21 @@ FinSubProceso
 
 Algoritmo agenda
 	
-	Definir nombre, eliminar, buscar, editar, vContacto, cont, telf Como Caracter;
-	Definir  i, tam, j Como Entero;
+	Definir nombre, eliminar, buscar, editar, mContactos, cont, telf Como Caracter;
+	Definir  i, tam, j, fila, columna Como Entero;
 	
+	Escribir "Dime le numero de filas que quieres";
+	Leer fila;
+	Escribir "Dime le numero de columnas que quieres";
+	Leer columna;
 	
-	tam=10;
-	Dimension vContacto[tam];
+	Dimension mContactos[fila,columna];
 	
-	Para i=0 Hasta tam -1 Con Paso 1 Hacer
-		vContacto[i]= "";
-	Fin Para
+	Para i=0 Hasta fila-1 Con Paso 1 Hacer
+        Para j=0 Hasta columna-1 Con Paso 1 Hacer
+            mContactos[fila,columna]="";
+        Fin Para
+    Fin Para
 	
 	i=0;
 	nombre="";
@@ -138,28 +143,24 @@ Algoritmo agenda
 	
 	
 	Repetir
-		Escribir "Pulsa 1 para añadir nuevos empleados";
-		Escribir "Pulsa 2 para borrar empleados";
-		Escribir "Pulsa 3 para editar empleados";
-		Escribir "Pulsa 4 para buscar empleados";
-		Escribir "Pulsa 5 para ver los empleados";
-		Escribir "Pulsa 6 para salir de la aplicacion";
+		Escribir "1-", " ", "Guardar contactos";
+		Escribir "2-", " ", "Ver contactos";
+		Escribir "3-", " ", "Eliminar contactos";
+		Escribir "4-", " ", "Editar contactos";
 		leer i;
 		
 		Segun i Hacer
 			1:
-				nuevo_contacto(vContacto,tam);
+				nuevo_contacto(mContactos,fila,columna);
 			2:
-				eliminar_contacto(vContacto,tam);
+				ver_contacto(mContactos,fila,columna);
 			3:
-				editar_contacto(vContacto,tam);
+				eliminar_contacto(mContactos,fila,columna);
 			4:
-				buscar_contacto(vContacto,tam);
-			5:
-				ver_contacto(vContacto,tam);
+				editar_contacto(mContactos,fila,columna);
 		Fin Segun
 		
-	Hasta Que i=6;
+	Hasta Que i=5;
 	
 	
 FinAlgoritmo
